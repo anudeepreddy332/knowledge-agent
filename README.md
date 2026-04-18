@@ -1,6 +1,7 @@
 # Knowledge Agent – Persistent RAG with Hybrid Search
 
-A local, memory-augmented agent that builds its own knowledge base.  
+A local, memory-augmented agent that builds its own knowledge base.
+
 Instead of starting blank every time, it retrieves, verifies, and reuses information from your documents and past web searches.
 
 **Stack**: DeepSeek API · ChromaDB · Sentence Transformers · Cross-Encoder Reranking · BM25 + Dense Retrieval · Tavily
