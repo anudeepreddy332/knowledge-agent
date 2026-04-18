@@ -1,0 +1,15 @@
+[project]
+name = "knowledge-agent"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.11"
+dependencies = [
+    "chromadb>=1.5.7",
+    "numpy>=2.4.4",
+    "openai>=2.31.0",
+    "pypdf2>=3.0.1",
+    "python-dotenv>=1.2.2",
+    "rank-bm25>=0.2.2",
+    "sentence-transformers>=5.4.0",
+    "tavily>=1.1.0",
+]

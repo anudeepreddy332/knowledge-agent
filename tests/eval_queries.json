@@ -1,0 +1,80 @@
+[
+  {
+    "id": "q01",
+    "question": "What is retrieval-augmented generation?",
+    "expected_tool": "query_knowledge_base",
+    "expected_keyword": "context window"
+  },
+  {
+    "id": "q02",
+    "question": "What are the three chunking strategies covered in my notes?",
+    "expected_tool": "query_knowledge_base",
+    "expected_keyword": "paragraph"
+  },
+  {
+    "id": "q03",
+    "question": "What is a retrieval miss and how do you fix it?",
+    "expected_tool": "query_knowledge_base",
+    "expected_keyword": "recall"
+  },
+  {
+    "id": "q04",
+    "question": "Why does ChromaDB use HNSW for indexing?",
+    "expected_tool": "query_knowledge_base",
+    "expected_keyword": "HNSW"
+  },
+  {
+    "id": "q05",
+    "question": "What embedding model is used and how large is it?",
+    "expected_tool": "query_knowledge_base",
+    "expected_keyword": "MiniLM"
+  },
+  {
+    "id": "q06",
+    "question": "What is context poisoning in RAG?",
+    "expected_tool": "query_knowledge_base",
+    "expected_keyword": "truthfulness"
+  },
+  {
+    "id": "q07",
+    "question": "What is the current price of Bitcoin?",
+    "expected_tool": "web_search",
+    "expected_keyword": null
+  },
+  {
+    "id": "q08",
+    "question": "Who won the 2025 Cricket World Cup?",
+    "expected_tool": "web_search",
+    "expected_keyword": null
+  },
+  {
+    "id": "q09",
+    "question": "What is the capital of Australia?",
+    "expected_tool": "web_search",
+    "expected_keyword": null
+  },
+  {
+    "id": "q10",
+    "question": "What training objective was used for the all-MiniLM-L6-v2 model?",
+    "expected_tool": "query_knowledge_base",
+    "expected_keyword": "NLI"
+  },
+    {
+    "id": "q11",
+    "question": "What chunking method does NOT work well for unstructured logs?",
+    "expected_tool": "query_knowledge_base",
+    "expected_keyword": "paragraph"
+  },
+  {
+    "id": "q12",
+    "question": "How do I prevent the model from hallucinating when it sees a document about river banks?",
+    "expected_tool": "query_knowledge_base",
+    "expected_keyword": "low-quality"
+  },
+  {
+    "id": "q13",
+    "question": "Is the 'all-MiniLM-L6-v2' model effective for sentiment analysis?",
+    "expected_tool": "query_knowledge_base",
+    "expected_keyword": "negation"
+  }
+]

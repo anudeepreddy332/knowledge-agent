@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
+db/
+outputs/
+reports/
+data/                         # whole data folder excluded
+!data/example.md              # except the example file
+data/my_notes.md
+
+# Scratch / local only (keep manually, don't commit)
+scripts/embeddings_scratch.py
+tests/test_rerank.py
+
+
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
