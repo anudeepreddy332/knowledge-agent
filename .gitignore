@@ -33,6 +33,7 @@ reports/
 data/                         # whole data folder excluded
 !data/example.md              # except the example file
 data/my_notes.md
+state.json
 
 # Scratch / local only (keep manually, don't commit)
 scripts/embeddings_scratch.py
