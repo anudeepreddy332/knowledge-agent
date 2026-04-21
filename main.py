@@ -11,6 +11,8 @@ import json
 from src.knowledge_agent.config import DEEPSEEK_BASE_URL, DEEPSEEK_MODEL
 from src.knowledge_agent.tools import TOOL_SCHEMAS, TOOL_EXECUTORS
 from openai import OpenAI
+from src.knowledge_agent.memory import load_state, save_state, record_question, format_history_for_prompt
+
 
 # System prompt
 # This is the single most important tuning knob for agent behaviour.
@@ -177,10 +179,18 @@ def main():
     )
     print("Knowledge Agent ready. Type 'quit' to exit.\n")
 
+    state = load_state()
+    history_str = format_history_for_prompt(state)
+    if history_str:
+        session_system_prompt = SYSTEM_PROMPT + "\n\n" + history_str
+    else:
+        session_system_prompt = SYSTEM_PROMPT
+
     messages = [{
         "role": "system",
-        "content": SYSTEM_PROMPT
+        "content": session_system_prompt
     }]
+
 
     while True:
         user_input = input("You: ").strip()
@@ -188,6 +198,9 @@ def main():
             continue
         if user_input.lower() in ("quit", "exit"):
             break
+
+        state = record_question(state, user_input)
+        save_state(state)
 
         messages.append({
             "role": "user",
