@@ -67,7 +67,10 @@ Example session:
     You: Save what you just found about OpenAI to the knowledge base  
     Agent: Saved 5 chunks from help.openai.com  
     You: What did OpenAI release in early 2025?  
-    Agent: [retrieves from saved KB, verifies claims, answers with inline citations]  
+    Agent: [retrieves from saved KB, verifies claims, answers with inline citations]
+
+Your session history is automatically saved to `state.json`. You can inspect it at any time to see past questions.
+
 
 ### 5. Evaluate
 
@@ -83,6 +86,31 @@ Expected output (13 queries):
 
 ---
 
+## Persistent Memory
+
+The agent remembers past questions and verified facts across sessions using a local JSON state file (`state.json`).
+
+**How it works:**
+- On startup, `load_state()` reads `state.json` (creates an empty state if missing).
+- After each question, `record_question()` appends the question to a history list (keeps the last 10).
+- The history is injected into the system prompt for context (interactive sessions only; evaluation uses the base prompt).
+- `save_state()` writes the updated state to disk atomically.
+
+**State schema:**
+```json
+{
+  "history": ["question1", "question2", ...],
+  "fact_ledger": {"claim": "source chunk ref", ...}
+}
+```
+
+The `fact_ledger` is reserved for future use (storing verified facts from `verify_claim`). The history helps the agent maintain conversational context over multiple runs.
+
+**File location:** `state.json` is created in the project root on first run. It is intentionally gitignored – each user maintains their own memory.
+
+
+---
+
 ## Project structure (what you need to know)
 ```
 knowledge-agent/  
@@ -92,17 +120,18 @@ knowledge-agent/
 │   └── evaluate.py         # Run eval suite  
 ├── src/knowledge_agent/  
 │   ├── tools.py            # All tool schemas + executors  
-│   └── config.py           # Constants (chunk size, model names, etc.)  
+│   └── config.py           # Constants (chunk size, model names, etc.)
+│   └── memory.py           # Persistent state management (history, fact ledger)    
 ├── tests/  
 │   └── eval_queries.json   # 13 ground-truth Q&A pairs  
 ├── data/  
 │   └── example.md          # Sample document (excluded from git)  
 ├── docs/  
-│   └── memory_rag_agent_casestudy.md   # Full case study  
+│   └── memory_rag_agent_casestudy.md   # Case study
 └── pyproject.toml          # Dependencies (uv)  
 ```
 
-> db/, outputs/, __pycache__/, .env are ignored.
+> db/, outputs/, __pycache__/, .env, state.json are ignored.
 
 ---
 
@@ -112,7 +141,7 @@ knowledge-agent/
 - **Cross-encoder reranking** fixes “wrong chunk” issues from bi-encoder alone.  
 - **verify_claim** prevents hallucination – every claim is checked against its source.  
 - **save_to_knowledge_base** closes the loop: web → KB → reusable memory.  
-- **No Anthropic / OpenAI billing** – only DeepSeek API.  
+- **DeepSeek API billing** 
 
 ---
 
