@@ -4,8 +4,8 @@ A local, memory-augmented agent that builds its own knowledge base.
 
 Instead of starting blank every time, it retrieves, verifies, and reuses information from your documents and past web searches.
 
-**Stack**: DeepSeek API · ChromaDB · Sentence Transformers · Cross-Encoder Reranking · BM25 + Dense Retrieval · Tavily
-
+**Stack**: DeepSeek API · ChromaDB · Sentence Transformers · Cross-Encoder Reranking · BM25 + Dense Retrieval · Tavily  
+**Case study**: [themachinist.org/knowledge-agent](https://themachinist.org/knowledge-agent)
 ---
 
 ## What it does
@@ -29,6 +29,15 @@ Instead of starting blank every time, it retrieves, verifies, and reuses informa
     → verify_claim  
     → Answer with citations  
     → (optional) save_to_knowledge_base  
+
+---
+## Benchmark results
+
+| Metric | Result |
+|--------|--------|
+| Tool routing accuracy | 100% |
+| Content hit rate | 92% |
+| Overall pass rate | 92% (12/13) |
 
 ---
 
@@ -111,7 +120,7 @@ The `fact_ledger` is reserved for future use (storing verified facts from `verif
 
 ---
 
-## Project structure (what you need to know)
+## Project structure
 ```
 knowledge-agent/  
 ├── main.py                 # ReAct loop, tool dispatch  
@@ -141,16 +150,7 @@ knowledge-agent/
 - **Cross-encoder reranking** fixes “wrong chunk” issues from bi-encoder alone.  
 - **verify_claim** prevents hallucination – every claim is checked against its source.  
 - **save_to_knowledge_base** closes the loop: web → KB → reusable memory.  
-- **DeepSeek API billing** 
-
----
-
-## What’s next (Phase 3)
-
-- Self-correction loop (LangGraph)  
-- Execution feedback and automatic repair  
-- Full cost tracking and latency budgets  
-
+- **DeepSeek cost tracking** — every API call logs input/output tokens and estimated cost; prevents runaway spend in multi-step sessions.
 ---
 
 ## License
